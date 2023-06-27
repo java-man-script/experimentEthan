@@ -1,0 +1,7 @@
+caseNumber,videoCode,linkID,question7,answer7,reponseQ1,reponseQ2,reponseQ3,reponseQ4,reponseQ5,reponseQ6,reponseQ7
+1,A4,YskHu9Ms5Kc,What is the color of the T-shirt the defendant was wearing? (White, black, yellow, blue) Ans:,white,1,1,1,1,1,0,White
+2,B1,jh8NRv3NfIE,The scene happened in a building. (True/ False) Ans:,False,1,1,1,1,1,0,True
+3,C2,w0-scyjZ50o,The scene happened in a building. (True/ False) Ans:,False,1,1,1,1,1,0,True
+4,D6,Edu_QpntQz8,A woman is clipped in the video. (True/ False) Ans:,True,1,1,1,1,1,0,True
+5,E3,J4xuUqY4pfA,A man is clipped in the video. (True/ False) Ans:,True,1,1,1,1,1,0,True
+6,F5,tpF5m3FShHg,How many police officers are there in the clip? (0-5) Ans:,2,1,1,1,1,1,0,0

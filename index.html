@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Criminal Perception Survey</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+		}
+	</style>
+	<script>
+
+		var currentPage = 1;
+		
+		let sixLinksQnA = getYouTubeEmbedLinkAndQs();	// generates 6 youtube linkID, corresponding verification question and it's answer
+		const unique6IDs = sixLinksQnA[0];
+		const specific6Questions = sixLinksQnA[1];
+		const specific6Answers = sixLinksQnA[2];
+		const specificVideoCodes = sixLinksQnA[3];
+
+		function nextPage() {
+			var totalPages = 7;
+			if (currentPage < totalPages) {
+
+				var currentPageDiv = document.getElementById("page" + currentPage);
+				currentPageDiv.style.display = "none";
+				currentPage++;
+
+				var nextPageDiv = document.getElementById("page" + currentPage);
+				nextPageDiv.style.display = "block";
+			} // else {
+            //     var taskCode = genCode(8);
+			// 	alert("You have completed the quiz. Your code is: "+ taskCode);
+			// }
+		}
+
+
+        
+        function genCode(length) {
+            var result = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+		function getYouTubeEmbedLinkAndQs(){
+			var IDs = [ [ 'nfLVe7s4EIQ', 'jh8NRv3NfIE', 'QrGJgQosjq0', '9OqDM2clMTQ', 'TcrJ7kH0bhM', '7rUKo8x1n34' ],
+						[ 'EoFVj_5WXYg', '8xvshsyIIa0', 'w0-scyjZ50o', 'rl_cqc74wDA', 'zT6JSIK5kdQ', 'o165klp9BVc' ],
+						[ 'zsFZuE4MFTE', 'zLPFMD3wZsU', 'i6SkocbDfEI', 'RK1ZiIcysmQ', 'J4xuUqY4pfA', 'lc_y5rxI8QQ' ],
+						[ 'YskHu9Ms5Kc', 'POW03KTL3rI', 'wKSsKEjYI4Q', 'Xe6VFTVTLcA', 'ptE9VhdnxpU', 'S5td2WckVTE' ],
+						[ 'OkM5px_sABI', 'UuvYPWwHDwY', 'oN8wZjRg2Ig', 'OgmtTMaDIfs', 'hU50GNthWSI', 'tpF5m3FShHg' ],
+						[ 'B0caqR0l6Po', 'AsV6zGB0xbE', '9em13bt34-g', 'Edu_QpntQz8', 'tKaFdu42vjo', 'GDIIHKKKZkU' ]
+					];
+
+			var videoCodes = [  ['A1', 'B1', 'C1', 'D1', 'E1', 'F1'],
+				['A2', 'B2', 'C2', 'D2', 'E2', 'F2'],
+				['A3', 'B3', 'C3', 'D3', 'E3', 'F3'],
+				['A4', 'B4', 'C4', 'D4', 'E4', 'F4'],
+				['A5', 'B5', 'C5', 'D5', 'E5', 'F5'],
+				['A6', 'B6', 'C6', 'D6', 'E6', 'F6']
+				];
+
+
+			var videoSpecificQuestions = 
+					[
+						["How many police officers are there in the clip? (0-5) Ans:", "The scene happened in a building. (True/ False) Ans:", "How many police officers are there in the clip? (0-5) Ans:", "The defendant is a male. (True/ False) Ans:", "How many police officers are there in the clip? (0-5) Ans:", "How many police officers are there in the clip? (0-5) Ans:"],
+
+						["How many police officers are there in the clip? (0-5) Ans:", "How many police officers are there in the clip? (0-5) Ans:", "The scene happened in a building. (True/ False) Ans:", "The defendant was a female. (True/ False) Ans:", "How many police officers are there in the clip? (0-5) Ans:", "How many police officers are there in the clip? (0-5) Ans:"],
+
+						["A man is clipped in the video. (True/ False) Ans:", "A woman is clipped in the video. (True/ False) Ans:", "A woman is clipped in the video. (True/ False) Ans:", "A woman is clipped in the video. (True/ False) Ans:", "A man is clipped in the video. (True/ False) Ans:", "A man is clipped in the video. (True/ False) Ans:"],
+
+						["What is the color of the T-shirt the defendant was wearing? (White, black, yellow, blue) Ans:", "The weather in the video was cloudy. (True/ False) Ans:", "The scene happened in a building. (True/ False) Ans:", "How many police officers are there in the clip? (0-5) Ans:", "How many police officers are there in the clip? (0-5) Ans:", "How many police officers are there in the clip? (0-5) Ans:"],
+
+						["How many police officers are there in the clip? (0-5) Ans:", "How many police officers are there in the clip? (0-5) Ans:", "What is the color of the T-shirt the defendant was wearing? (Light green, dark blue, white, black and white stripes) Ans:", "What is the color of the defendant's car? (White, green, black, blue) Ans:", "How many police officers are there in the clip? (0-5) Ans:", "How many police officers are there in the clip? (0-5) Ans:"],
+
+						["A woman is clipped in the video. (True/ False) Ans:", "A woman is clipped in the video. (True/ False) Ans:", "A woman is clipped in the video. (True/ False) Ans:", "A woman is clipped in the video. (True/ False) Ans:", "A man is clipped in the video. (True/ False) Ans:", "A woman is clipped in the video. (True/ False) Ans:"]
+					];
+
+			var videoSpecificAnswers = 
+					[  
+						['2', 'False', '2', 'False', '1', '2'],
+						['2', '2', 'False', 'True', '1', '2'],
+						['True', 'False', 'True', 'True', 'True', 'True'],
+						['white', 'False', 'False', '2 or 3', '1', '2'],
+						['2', '2', 'light green', 'black', '1', '2'],
+						['False', 'False', 'True', 'True', 'True', 'False']
+					];
+
+			var unique6Indices = selectUniqueRandomIndices(IDs);
+
+
+			// console.log(unique6Indices);
+			let unique6IDs = [];
+			let specific6Questions = [];
+			let specific6Answers = [];
+			let specificVideoCodes = [];
+
+			for (let i = 0; i<unique6Indices.length; i++)
+				{	
+					let uniqueIndex = unique6Indices[i];
+					unique6IDs.push(IDs[uniqueIndex[0]][uniqueIndex[1]]);
+					specific6Questions.push(videoSpecificQuestions[uniqueIndex[0]][uniqueIndex[1]]);
+					specific6Answers.push(videoSpecificAnswers[uniqueIndex[0]][uniqueIndex[1]]);
+					specificVideoCodes.push(videoCodes[uniqueIndex[0]][uniqueIndex[1]]);
+				}
+
+			
+			return [unique6IDs,specific6Questions,specific6Answers,specificVideoCodes];
+		}
+
+		function selectUniqueRandomElements(array) {
+			let selectedElements = [];
+			let numRows = array.length;
+			let numCols = array[0].length;
+
+			for (let j = 0; j < numCols; j++) {
+				let uniqueRandomIndex;
+				do {
+				uniqueRandomIndex = Math.floor(Math.random() * numRows);
+				} while (selectedElements.includes(array[uniqueRandomIndex][j]));
+				selectedElements.push(array[uniqueRandomIndex][j]);
+			}
+
+			return selectedElements;
+		}
+
+		function selectUniqueRandomIndices(array) {
+			let selectedIndices = [];
+			let numRows = array.length;
+			let numCols = array[0].length;
+
+			for (let j = 0; j < numCols; j++) {
+				let uniqueRandomIndex;
+				do {
+				uniqueRandomIndex = Math.floor(Math.random() * numRows);
+				} while (selectedIndices.some(([i, k]) => i === uniqueRandomIndex || k === j));
+				selectedIndices.push([uniqueRandomIndex, j]);
+			}
+
+			return selectedIndices;
+		}
+
+		function showRadioButtons(ans, index) {
+			// Get the HTML element where you want to add the radio buttons
+			const container = document.getElementById("q7-radio"+index);
+
+			// Remove any existing radio buttons
+			container.innerHTML = "";
+
+			if (ans === "1" || ans === "2" || ans === "2 or 3") {
+				// Add 5 radio buttons with values from 0 to 5
+				for (let i = 0; i <= 5; i++) {
+					const radio = document.createElement("input");
+					radio.type = "radio";
+					radio.name = "q7";
+					radio.value = i;
+					container.appendChild(radio);
+
+					const label = document.createElement("label");
+					label.innerHTML = i;
+					container.appendChild(label);
+
+					container.appendChild(document.createElement("br"));
+				}
+			} else if (ans === "True" || ans === "False") {
+				// Add 2 radio buttons for True and False
+				const trueRadio = document.createElement("input");
+				trueRadio.type = "radio";
+				trueRadio.name = "q7";
+				trueRadio.value = "True";
+				container.appendChild(trueRadio);
+
+				const trueLabel = document.createElement("label");
+				trueLabel.innerHTML = "True";
+				container.appendChild(trueLabel);
+
+				container.appendChild(document.createElement("br"));
+
+				const falseRadio = document.createElement("input");
+				falseRadio.type = "radio";
+				falseRadio.name = "q7";
+				falseRadio.value = "False";
+				container.appendChild(falseRadio);
+
+				const falseLabel = document.createElement("label");
+				falseLabel.innerHTML = "False";
+				container.appendChild(falseLabel);
+			} 
+			
+			else if (ans === "black") {
+			// Add 4 radio buttons for white, green, black, and blue
+			const whiteRadio = document.createElement("input");
+			whiteRadio.type = "radio";
+			whiteRadio.name = "q7";
+			whiteRadio.value = "White";
+			container.appendChild(whiteRadio);
+
+			const whiteLabel = document.createElement("label");
+			whiteLabel.innerHTML = "White";
+			container.appendChild(whiteLabel);
+
+			container.appendChild(document.createElement("br"));
+
+			const greenRadio = document.createElement("input");
+			greenRadio.type = "radio";
+			greenRadio.name = "q7";
+			greenRadio.value = "Green";
+			container.appendChild(greenRadio);
+
+			const greenLabel = document.createElement("label");
+			greenLabel.innerHTML = "Green";
+			container.appendChild(greenLabel);
+
+			container.appendChild(document.createElement("br"));
+
+			const blackRadio = document.createElement("input");
+			blackRadio.type = "radio";
+			blackRadio.name = "q7";
+			blackRadio.value = "Black";
+			container.appendChild(blackRadio);
+
+			const blackLabel = document.createElement("label");
+			blackLabel.innerHTML = "Black";
+			container.appendChild(blackLabel);
+
+			container.appendChild(document.createElement("br"));
+
+			const blueRadio = document.createElement("input");
+			blueRadio.type = "radio";
+			blueRadio.name = "q7";
+			blueRadio.value = "Blue";
+			container.appendChild(blueRadio);
+
+			const blueLabel = document.createElement("label");
+			blueLabel.innerHTML = "Blue";
+			container.appendChild(blueLabel);
+		} 
+		
+		else if (ans === "white") {
+			// Add 4 radio buttons for white, black, yellow, and blue
+			const whiteRadio = document.createElement("input");
+			whiteRadio.type = "radio";
+			whiteRadio.name = "q7";
+			whiteRadio.value = "White";
+			container.appendChild(whiteRadio);
+
+			const whiteLabel = document.createElement("label");
+			whiteLabel.innerHTML = "White";
+			container.appendChild(whiteLabel);
+			container.appendChild(document.createElement("br"));
+
+			const blackRadio = document.createElement("input");
+			blackRadio.type = "radio";
+			blackRadio.name = "q7";
+			blackRadio.value = "Black";
+			container.appendChild(blackRadio);
+
+			const blackLabel = document.createElement("label");
+			blackLabel.innerHTML = "Black";
+			container.appendChild(blackLabel);
+			container.appendChild(document.createElement("br"));
+
+			const yellowRadio = document.createElement("input");
+			yellowRadio.type = "radio";
+			yellowRadio.name = "q7";
+			yellowRadio.value = "Yellow";
+			container.appendChild(yellowRadio);
+
+			const yellowLabel = document.createElement("label");
+			yellowLabel.innerHTML = "Yellow";
+			container.appendChild(yellowLabel);
+			container.appendChild(document.createElement("br"));
+
+			const blueRadio = document.createElement("input");
+			blueRadio.type = "radio";
+			blueRadio.name = "q7";
+			blueRadio.value = "Blue";
+			container.appendChild(blueRadio);
+
+			const blueLabel = document.createElement("label");
+			blueLabel.innerHTML = "Blue";
+			container.appendChild(blueLabel);
+		}
+
+		else if (ans === "light green") {
+				// Add 4 radio buttons for Light green, dark blue, white, and black and white stripes
+				const lightGreenRadio = document.createElement("input");
+				lightGreenRadio.type = "radio";
+				lightGreenRadio.name = "q7";
+				lightGreenRadio.value = "Light green";
+				container.appendChild(lightGreenRadio);
+
+				const lightGreenLabel = document.createElement("label");
+				lightGreenLabel.innerHTML = "Light green";
+				container.appendChild(lightGreenLabel);
+
+				container.appendChild(document.createElement("br"));
+
+				const darkBlueRadio = document.createElement("input");
+				darkBlueRadio.type = "radio";
+				darkBlueRadio.name = "q7";
+				darkBlueRadio.value = "Dark blue";
+				container.appendChild(darkBlueRadio);
+
+				const darkBlueLabel = document.createElement("label");
+				darkBlueLabel.innerHTML = "Dark blue";
+				container.appendChild(darkBlueLabel);
+
+				container.appendChild(document.createElement("br"));
+
+				const whiteRadio = document.createElement("input");
+				whiteRadio.type = "radio";
+				whiteRadio.name = "q7";
+				whiteRadio.value = "White";
+				container.appendChild(whiteRadio);
+
+				const whiteLabel = document.createElement("label");
+				whiteLabel.innerHTML = "White";
+				container.appendChild(whiteLabel);
+
+				container.appendChild(document.createElement("br"));
+
+				const bwStripesRadio = document.createElement("input");
+				bwStripesRadio.type = "radio";
+				bwStripesRadio.name = "q7";
+				bwStripesRadio.value = "Black and white stripes";
+				container.appendChild(bwStripesRadio);
+
+				const bwStripesLabel = document.createElement("label");
+				bwStripesLabel.innerHTML = "Black and white stripes";
+				container.appendChild(bwStripesLabel);
+			}
+			
+			
+			else {
+				// Invalid ans value
+				container.innerHTML = "Invalid input";
+			}
+		}
+
+		function submitPage() {
+			var q1 = document.querySelector('input[name="q1"]:checked');
+			var q2 = document.querySelector('input[name="q2"]:checked');
+			var q3 = document.querySelector('input[name="q3"]:checked');
+			var q4 = document.querySelector('input[name="q4"]:checked');
+			var q5 = document.querySelector('input[name="q5"]:checked');
+			var q6 = document.querySelector('input[name="q6"]:checked');
+			var q7 = document.querySelector('input[name="q7"]:checked');
+
+			//console.log(!q1, q2, q3, q4, q5, q6, !q7);
+
+			if(currentPage==1 && !q1 || !q2 || !q3 || !q4 || !q5 || !q6 || !q7){
+				alert("Please answer all questions.");
+			}
+
+			else if (currentPage > 1 && q1.value==-1 || q2.value==-1 || q3.value==-1 || q4.value==-1 || q5.value==-1 || q6.value==-1 || q7.value==-1) {
+				alert("Please answer all questions.");
+			}
+
+			else{
+
+				let caseNumber = currentPage;
+				let linkID = unique6IDs[currentPage-1];
+				let question7 = specific6Questions[currentPage-1];
+				let answer7 = specific6Answers[currentPage-1];
+				let videoCode = specificVideoCodes[currentPage-1];
+
+				dataCSV += caseNumber + ',' + videoCode + ',' + linkID + ',' + question7 + ',' + answer7 + ',' + q1.value + ',' + q2.value + ',' + q3.value + ',' + q4.value + ',' + q5.value + ',' + q6.value + ',' + q7.value+'\n';
+				
+				console.log(dataCSV);
+
+				nextPage();
+				q1.value = -1;
+				q2.value = -1;
+				q3.value = -1;
+				q4.value = -1;
+				q5.value = -1;
+				q6.value = -1;
+				q7.value = -1;
+				
+			}
+		}
+	</script>
+
+
+</head>
+<body>
+
+
+	<h1>Criminal Perception Survey</h1>
+	
+	<div id="page1">
+		<h2>Case 1</h2>
+		<iframe width="1000" height="500" id="page1frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case1questions"></div>
+		<div id="q7-radio1" class="radio-buttons"></div>
+		<button onclick="submitPage()">Next</button>
+
+	</div>
+
+
+	<div id="page2" style="display:none">
+		<h2>Case 2</h2>
+		<iframe width="1000" height="500" id="page2frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case2questions"></div>
+		<div id="q7-radio2" class="radio-buttons"></div>
+
+		<button onclick="submitPage()">Next</button>
+	</div>
+
+	
+
+	<div id="page3" style="display:none">
+		<h2>Case 3</h2>
+		<iframe width="1000" height="500" id="page3frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case3questions"></div>
+		<div id="q7-radio3" class="radio-buttons"></div>
+
+		<button onclick="submitPage()">Next</button>
+
+	</div>
+
+	
+	<div id="page4" style="display:none">
+		<h2>Case 4</h2>
+		<iframe width="1000" height="500" id="page4frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case4questions"></div>
+		<div id="q7-radio4" class="radio-buttons"></div>
+
+		<button onclick="submitPage()">Next</button>
+
+	</div>
+
+	
+	<div id="page5" style="display:none">
+		<h2>Case 5</h2>
+		<iframe width="1000" height="500" id="page5frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case5questions"></div>
+		<div id="q7-radio5" class="radio-buttons"></div>
+
+		<button onclick="submitPage()">Next</button>
+
+	</div>
+
+	
+	<div id="page6" style="display:none">
+		<h2>Case 6</h2>
+		<iframe width="1000" height="500" id="page6frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case6questions"></div>
+		<div id="q7-radio6" class="radio-buttons"></div>
+
+		<button onclick="submitPage()">Next</button>
+
+	</div>
+
+    
+	<div id="page7" style="display:none">
+	    
+		<div id="doneText"><strong>Thanks for doing the task. Please answer the following then submit to know your redemption code. </strong><br /></div>
+	
+		<div class= "personalInfo">
+			<p>What is your age group?</p>
+			<label><input type="radio" name="age" value="below 18">Below 18</label>
+			<label><input type="radio" name="age" value="18-24">18-24</label>
+			<label><input type="radio" name="age" value="25-34">25-34</label>
+			<label><input type="radio" name="age" value="35-44">35-44</label>
+			<label><input type="radio" name="age" value="45-54">45-54</label>
+			<label><input type="radio" name="age" value="55-64">55-64</label>
+			<label><input type="radio" name="age" value="above 65">Above 65</label>
+		</div>
+
+		<br>
+
+		<div class= "personalInfo">
+			<p>To which gender identity do you most identify?</p>
+			<label><input type="radio" name="gender" value="male">Male</label>
+			<label><input type="radio" name="gender" value="female">Female</label>
+			<label><input type="radio" name="gender" value="other">Other</label>
+			<label><input type="radio" name="gender" value="prefer not to answer">Prefer not to answer</label>
+		</div>
+			
+		<br>
+
+		<div class= "personalInfo">
+			<p>How would you best describe yourself?</p>
+			<label><input type="radio" name="race" value="white/caucasian">White/Caucasian</label>
+			<label><input type="radio" name="race" value="black/african american">Black/African American</label>
+			<label><input type="radio" name="race" value="hispanic latino">Hispanic Latino</label>
+			<label><input type="radio" name="race" value="asian">Asian</label>
+			<label><input type="radio" name="race" value="american indian">American Indian</label>
+			<label><input type="radio" name="race" value="middle eastern/north african">Middle Eastern/North African</label>
+			<label><input type="radio" name="race" value="native hawaiian/pacific islander">Native Hawaiian/Pacific Islander</label>
+			<label><input type="radio" name="race" value="other">Other</label>
+		</div>
+		
+		<br>
+
+		<div>
+			Please enter your Mechanical Turk "workerID" in the box below and click the "Submit" button to get your redemption code. <br><br>
+			<textarea cols="40" id="commentBox" placeholder="  Enter you workerID here..." row="4"></textarea> <input id="workerID" name="workerID" type="hidden" /><br />
+			<br>
+			<input type='button' value='Submit' id='submitButton'>
+
+		</div>
+		
+
+	</div>
+	
+	<script>
+		var response;
+		response = "1";
+		
+		// var dataCSV = 'questionNumber,linkID,question,answer,response\n';
+		var dataCSV = 'caseNumber,videoCode,linkID,question7,answer7,reponseQ1,reponseQ2,reponseQ3,reponseQ4,reponseQ5,reponseQ6,reponseQ7\n';
+
+
+		for (var i = 0; i < unique6IDs.length; i++) {
+			linkID =  unique6IDs[i];
+			link = 	"https://www.youtube.com/embed/"+ linkID;
+			que = specific6Questions[i];
+			ans = specific6Answers[i];
+			var frameId = 'page' + (i+1) + 'frame'; // Get the iframe ID
+			var frame = document.getElementById(frameId); // Get the iframe element
+			frame.src = link; // Set the src attribute to the corresponding URL
+
+
+			// get question 7
+			let q7 = "<br>" + que + "<br><br>";
+			
+
+
+				
+			const myDiv = document.getElementById("case"+(i+1)+"questions");
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				const htmlString = this.responseText;
+
+				// Step 3: Create new HTML block
+				const newBlock = document.createElement("div");
+				newBlock.innerHTML = htmlString + " " + q7;
+
+				// Step 4: Append the new block to the div
+				myDiv.appendChild(newBlock);
+			};
+			xhr.open('GET', 'questions.html');
+			xhr.send();
+
+			// show corresponding radio buttons
+			index = i+1;
+			showRadioButtons(ans, index);
+
+
+		}
+
+		doneExperiment();
+
+
+        function doneExperiment() {	 	
+            $('#submitButton').show();	 
+            $('#submitButton').css('display','block');
+			
+            $('#submitButton').click(function (event) {
+				// get selected age group value
+				var age = $('input[name="age"]:checked').val();
+
+				// get selected gender value
+				var gender = $('input[name="gender"]:checked').val();
+
+				// get selected race value
+				var race = $('input[name="race"]:checked').val();
+
+				
+                var workerID = document.getElementById('commentBox').value;
+    
+                event.preventDefault();
+                var taskcode = genCode(8);
+                // alert("sending data");
+                // call this ajax functiona after any event like a form submit, like here
+                $('#submitButton').html("Please Wait...");
+                $("#submitButton").attr("disabled", true);
+                $.ajax({
+                    data: {
+                        //setup the varibles you want to send to submit.php
+                        data: dataCSV,
+                        workerID: workerID,
+                        code: taskcode,
+                        age: age,
+                        gender: gender,
+                        race: race
+                    },
+                    type: 'POST',
+                    url: 'submit.php'
+                }).done(function (data) {
+                    $('#doneText').hide();
+                    alert(data);
+                    console.log(data);
+                });
+            })
+        }	
+
+        // function doneExperiment() {
+        //     $('#submitButton').show();	 
+        //     $('#submitButton').css('display','block'); 
+
+        //     $('#submitButton').click(function (event) {
+        //         event.preventDefault();
+        //         var taskcode = genCode(8);
+        //         // alert("sending data");
+        //         // call this ajax functiona after any event like a form submit, like here
+        //         $('#submitButton').html("Please Wait...");
+        //         $("#submitButton").attr("disabled", true);
+
+		// 		// get selected age group value
+		// 		const age = $('input[name="age"]:checked').val();
+
+		// 		// get selected gender value
+		// 		const gender = $('input[name="gender"]:checked').val();
+
+		// 		// get selected race value
+		// 		const race = $('input[name="race"]:checked').val();
+
+				
+        //         const workerID = document.getElementById('commentBox').value;
+
+
+
+		// 		if (age && gender && race && workerID) {
+		// 			$.ajax({
+		// 				data: {
+		// 					//setup the varibles you want to send to submit.php
+		// 					data: dataCSV,
+		// 					code: taskcode,
+		// 					workerID: workerID,
+		// 					age: age,
+		// 					gender: gender,
+		// 					race: race
+		// 				},
+		// 				type: 'POST',
+		// 				url: 'submit.php'
+		// 			}).done(function (data) {
+		// 				$('#doneText').hide();
+		// 				// alert(data);
+		// 				console.log(data);
+		// 			});
+		// 		}
+		// 		else{
+		// 			// Give an alert if any of the required fields are not filled
+		// 			alert("Please fill all required fields: Age, Gender, Race, and Worker ID.");
+		// 			$("#submitButton").removeAttr("disabled");
+		// 		}
+        //     })
+        // }	
+    
+
+		// $(document).ready(function() {
+		// 	$("#case1questions").load("questions.html #q1-7");
+		// 	$("#case2questions").load("questions.html #q1-7");
+		// 	$("#case3questions").load("questions.html #q1-7");
+		// 	$("#case4questions").load("questions.html #q1-7");
+		// 	$("#case5questions").load("questions.html #q1-7");
+		// 	$("#case6questions").load("questions.html #q1-7");
+		// });
+		
+
+	</script>
+
+<style>
+	.radio-buttons {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: space-evenly; 
+	}
+</style>
+
+
+</body>
+</html>
+    
