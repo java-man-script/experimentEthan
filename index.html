@@ -46,6 +46,15 @@
             return result;
         }
 
+		function shuffleArray(array) {
+			for (let i = array.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[array[i], array[j]] = [array[j], array[i]];
+			}
+			return array;
+		}
+
+
 		function getYouTubeEmbedLinkAndQs(){
 			var IDs = [ [ 'nfLVe7s4EIQ', 'jh8NRv3NfIE', 'QrGJgQosjq0', '9OqDM2clMTQ', 'TcrJ7kH0bhM', '7rUKo8x1n34' ],
 						[ 'EoFVj_5WXYg', '8xvshsyIIa0', 'w0-scyjZ50o', 'rl_cqc74wDA', 'zT6JSIK5kdQ', 'o165klp9BVc' ],
@@ -89,10 +98,12 @@
 						['False', 'False', 'True', 'True', 'True', 'False']
 					];
 
-			var unique6Indices = selectUniqueRandomIndices(IDs);
+			var unique6Indices = selectUniqueRandomIndices(IDs); // generates A#, B#, C#, D#, E#, F#
+			// shuffle them
+			unique6Indices = shuffleArray(unique6Indices);
 
 
-			// console.log(unique6Indices);
+			console.log(unique6Indices);
 			let unique6IDs = [];
 			let specific6Questions = [];
 			let specific6Answers = [];
@@ -341,7 +352,16 @@
 			}
 		}
 
+		function scrollToTop() {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		}
+
+
 		function submitPage() {
+			scrollToTop();
 			var q1 = document.querySelector('input[name="q1"]:checked');
 			var q2 = document.querySelector('input[name="q2"]:checked');
 			var q3 = document.querySelector('input[name="q3"]:checked');
@@ -391,76 +411,13 @@
 
 
 	<h1>Criminal Perception Survey</h1>
+	<br>
 	
 	<div id="page1">
-		<h2>Case 1</h2>
-		<iframe width="1000" height="500" id="page1frame" frameborder="0" allowfullscreen></iframe>
-		<div id="case1questions"></div>
-		<div id="q7-radio1" class="radio-buttons"></div>
-		<button onclick="submitPage()">Next</button>
+		<p>
+			<b> Welcome to the Criminal Perception Survey. Please answer the following questions before moving to the main part of the survey.
+		</b></p>
 
-	</div>
-
-
-	<div id="page2" style="display:none">
-		<h2>Case 2</h2>
-		<iframe width="1000" height="500" id="page2frame" frameborder="0" allowfullscreen></iframe>
-		<div id="case2questions"></div>
-		<div id="q7-radio2" class="radio-buttons"></div>
-
-		<button onclick="submitPage()">Next</button>
-	</div>
-
-	
-
-	<div id="page3" style="display:none">
-		<h2>Case 3</h2>
-		<iframe width="1000" height="500" id="page3frame" frameborder="0" allowfullscreen></iframe>
-		<div id="case3questions"></div>
-		<div id="q7-radio3" class="radio-buttons"></div>
-
-		<button onclick="submitPage()">Next</button>
-
-	</div>
-
-	
-	<div id="page4" style="display:none">
-		<h2>Case 4</h2>
-		<iframe width="1000" height="500" id="page4frame" frameborder="0" allowfullscreen></iframe>
-		<div id="case4questions"></div>
-		<div id="q7-radio4" class="radio-buttons"></div>
-
-		<button onclick="submitPage()">Next</button>
-
-	</div>
-
-	
-	<div id="page5" style="display:none">
-		<h2>Case 5</h2>
-		<iframe width="1000" height="500" id="page5frame" frameborder="0" allowfullscreen></iframe>
-		<div id="case5questions"></div>
-		<div id="q7-radio5" class="radio-buttons"></div>
-
-		<button onclick="submitPage()">Next</button>
-
-	</div>
-
-	
-	<div id="page6" style="display:none">
-		<h2>Case 6</h2>
-		<iframe width="1000" height="500" id="page6frame" frameborder="0" allowfullscreen></iframe>
-		<div id="case6questions"></div>
-		<div id="q7-radio6" class="radio-buttons"></div>
-
-		<button onclick="submitPage()">Next</button>
-
-	</div>
-
-    
-	<div id="page7" style="display:none">
-	    
-		<div id="doneText"><strong>Thanks for doing the task. Please answer the following then submit to know your redemption code. </strong><br /></div>
-	
 		<div class= "personalInfo">
 			<p>What is your age group?</p>
 			<label><input type="radio" name="age" value="below 18">Below 18</label>
@@ -495,7 +452,95 @@
 			<label><input type="radio" name="race" value="native hawaiian/pacific islander">Native Hawaiian/Pacific Islander</label>
 			<label><input type="radio" name="race" value="other">Other</label>
 		</div>
-		
+
+
+
+		<p>
+			<br>
+			<br>
+		<b>Now there will be six cases each containing a video that you should watch and answer the questions that follow after the video. 
+			It is compulsory to answer all the questions.</b>
+		</p>
+		<br>
+
+		<h2>Case 1: Watch the video carefully and then answer the questions listed after that.</h2>
+		<iframe width="1000" height="500" id="page1frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case1questions"></div>
+		<div id="q7-radio1" class="radio-buttons"></div>
+		<br><br><br>
+		<button onclick="submitPage()">Press here to proceed to Next Case</button>
+		<br><br><br><br>
+
+	</div>
+
+
+	<div id="page2" style="display:none">
+		<h2>Case 2: Watch the video carefully and then answer the questions listed after that.</h2>
+		<iframe width="1000" height="500" id="page2frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case2questions"></div>
+		<div id="q7-radio2" class="radio-buttons"></div>
+
+		<br><br><br>
+		<button onclick="submitPage()">Press here to proceed to Next Case</button>
+		<br><br><br><br>
+	</div>
+
+	
+
+	<div id="page3" style="display:none">
+		<h2>Case 3: Watch the video carefully and then answer the questions listed after that.</h2>
+		<iframe width="1000" height="500" id="page3frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case3questions"></div>
+		<div id="q7-radio3" class="radio-buttons"></div>
+
+		<br><br><br>
+		<button onclick="submitPage()">Press here to proceed to Next Case</button>
+		<br><br><br><br>
+
+	</div>
+
+	
+	<div id="page4" style="display:none">
+		<h2>Case 4: Watch the video carefully and then answer the questions listed after that.</h2>
+		<iframe width="1000" height="500" id="page4frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case4questions"></div>
+		<div id="q7-radio4" class="radio-buttons"></div>
+
+		<br><br><br>
+		<button onclick="submitPage()">Press here to proceed to Next Case</button>
+		<br><br><br><br>
+
+	</div>
+
+	
+	<div id="page5" style="display:none">
+		<h2>Case 5: Watch the video carefully and then answer the questions listed after that.</h2>
+		<iframe width="1000" height="500" id="page5frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case5questions"></div>
+		<div id="q7-radio5" class="radio-buttons"></div>
+
+		<br><br><br>
+		<button onclick="submitPage()">Press here to proceed to Next Case</button>
+		<br><br><br><br>
+
+	</div>
+
+	
+	<div id="page6" style="display:none">
+		<h2>Case 6: Watch the video carefully and then answer the questions listed after that.</h2>
+		<iframe width="1000" height="500" id="page6frame" frameborder="0" allowfullscreen></iframe>
+		<div id="case6questions"></div>
+		<div id="q7-radio6" class="radio-buttons"></div>
+
+		<br><br><br>
+		<button onclick="submitPage()">Press here to proceed</button>
+		<br><br><br><br>
+
+	</div>
+
+    
+	<div id="page7" style="display:none">
+		<div id="doneText"><strong>Thanks for doing the task. </strong><br /></div>	
 		<br>
 
 		<div>
@@ -503,7 +548,6 @@
 			<textarea cols="40" id="commentBox" placeholder="  Enter you workerID here..." row="4"></textarea> <input id="workerID" name="workerID" type="hidden" /><br />
 			<br>
 			<input type='button' value='Submit' id='submitButton'>
-
 		</div>
 		
 
@@ -528,7 +572,7 @@
 
 
 			// get question 7
-			let q7 = "<br>" + que + "<br><br>";
+			let q7 = que + "<br><br>";
 			
 
 
@@ -556,7 +600,6 @@
 		}
 
 		doneExperiment();
-
 
         function doneExperiment() {	 	
             $('#submitButton').show();	 

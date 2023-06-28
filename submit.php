@@ -8,7 +8,7 @@
         $gender =  $_POST['gender'];
         $race =  $_POST['race'];
 
-        $details = "workerID, redemptionCode, age, gender, race, ".$workerID.", ".$taskcode.", ".$age.", ".$gender.", ".$race;
+        $details = "workerID, redemptionCode, age, gender, race"."\n".$workerID.", ".$taskcode.", ".$age.", ".$gender.", ".$race;
 
         $sendTo = "ankit.721302@gmail.com";
         $subject = $workerID." just finished their task ";
